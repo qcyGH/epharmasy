@@ -9,5 +9,4 @@ Next.js + MySQL
 - [X] Cart modal
 - [ ] Create user
 - [ ] Create order
-- [ ] Cart page
-- [ ] Sending data to DB
+- [X] Cart page
