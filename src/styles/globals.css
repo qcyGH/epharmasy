@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Roboto Mono';
+}
+
+html,
+body {
+  background: transparent !important;
+  height: 100%;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* container alternative */
+/* https://habr.com/ru/post/463923/ */
+
+section.content{
+  padding: 25px 15px;
+}
+
+@media (min-width: 575.98px){
+  section.content {
+    padding: 25px calc(50% - 270px);
+  }
+}
+
+@media (min-width: 767.98px){
+  section.content {
+    padding: 25px calc(50% - 360px);
+  }
+}
+
+@media (min-width: 991.98px) {
+  section.content {
+    padding: 25px calc(50% - 480px);
+  }
+}
+
+@media (min-width: 1199.98px){
+  section.content {
+    padding: 25px calc(50% - 590px);
+  }
+}
+
+/* container alternative */
+
+#__next {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+a {
+  opacity: 0.7;
+}
+
+a.active {
+  opacity: 1;
+}
+
+/* Slider */
+
+.swiper {
+  margin: 0 !important;
+}
+
+.swiper-button-next, .swiper-button-prev {
+	width: calc(30px/ 44 * 27) !important;
+	height: 30px !important;
+	margin-top: calc(0px - (30px/ 2)) !important;
+	color: #9d4dbb !important;
+
+  background-color: #262626;
+  padding: 15px;
+  border-radius: 14px;
+}
+
+.swiper-button-next, .swiper-rtl .swiper-button-prev {
+  right: 20px !important;
+}
+
+.swiper-button-prev, .swiper-rtl .swiper-button-next {
+  left: 20px !important;
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+	font-size: 15px !important;
+}
+
+.swiper-pagination-bullet {
+  border-radius: 5rem !important;
+	width: 8px !important;
+	height: 8px !important;
+	background: #9d4dbb !important;
+
+  transition: width 300ms ease !important;
+}
+
+.swiper-pagination-bullet-active {
+	width: 16px !important;
+	background: #9d4dbb !important;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+	bottom: -6px !important;
+}
+
+
+
+
+/* Slider */
