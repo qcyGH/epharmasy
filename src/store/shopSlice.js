@@ -12,7 +12,7 @@ const shopSlice = createSlice({
 
             const item = action.payload.item
 
-            const itemIndex = state.orderList.findIndex(orderItem => orderItem.id === item.id)
+            const itemIndex = state.orderList.findIndex(orderItem => orderItem.medicine_id === item.medicine_id)
 
             if (itemIndex < 0) {
                 //showNotification(item.name)
@@ -41,12 +41,12 @@ const shopSlice = createSlice({
         },
         removeItem(state, action) {
             console.log(action.payload)
-            const newOrder = state.orderList.filter((item) => item.id !== action.payload)
+            const newOrder = state.orderList.filter((item) => item.medicine_id !== action.payload)
             state.orderList = newOrder
         },
         changeQuantity(state, action) {
 
-            const itemIndex = state.orderList.findIndex(orderItem => orderItem.id === action.payload.item.id)
+            const itemIndex = state.orderList.findIndex(orderItem => orderItem.medicine_id === action.payload.item.medicine_id)
 
             const newOrder = state.orderList.map((orderItem, index) => {
                 if (index === itemIndex) {

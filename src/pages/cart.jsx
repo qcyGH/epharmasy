@@ -22,7 +22,7 @@ export default function Cart() {
     let newTotalPrice = 0
 
     orderList.forEach(item => {
-      newTotalPrice += item.finalPrice * item.quantity
+      newTotalPrice += item.price * item.quantity
     })
 
     setTotalPrice(newTotalPrice)
@@ -55,18 +55,18 @@ export default function Cart() {
               <div className='flex-col py-4 px-4'>
                 {
                   orderList.map(item => (
-                    item.items ? <CartItemSlider
+                    item.image2 != 'any' ? <CartItemSlider
                       item={item}
-                      key={item.id}
+                      key={item.medicine_id}
                     />
                     : <CartItem
                       item={item}
-                      key={item.id}
+                      key={item.medicine_id}
                     />
                   ))
                 }
               </div>
-              <span className='block text-right pr-2'>Total price: {totalPrice}</span>
+              <span className='block text-right pr-2'>Total price: {totalPrice} $</span>
             </div>
         </div>
       : <div className='flex flex-col justify-center items-center'>
@@ -85,17 +85,17 @@ export default function Cart() {
                                       playSound()
 
                                       notification({
-                                          title: `Congratulations, ${user} All items was added to your Fortnite account`,
-                                          status: 'success',
-                                          duration: 3000,
-                                          isClosable: true,
+                                        title: `Congratulations, ${user}. All goods have added to order`,
+                                        status: 'success',
+                                        duration: 3000,
+                                        isClosable: true,
                                       })
 
                                       dispatch(makePurchase())
                                     }}
                                     className='text-lg text-slate-100 bg-purple-600 width-max px-6 py-2 my-2 rounded-md hover:scale-95 active:scale-90 transition-all ease duration-200'
                                   >
-                                      Purchase
+                                    Purchase
                                   </button>
                                 </div>
         }

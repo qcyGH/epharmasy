@@ -33,7 +33,7 @@ export function List() {
                 manufacturer={item.manufacturer}
                 price={item.price}
                 images={[item.image, item.image2]}
-                item={[item]}
+                item={item}
               />
             ) : (
               <Card

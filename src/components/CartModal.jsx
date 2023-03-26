@@ -17,7 +17,7 @@ export function CartModal(props) {
         let newTotalPrice = 0
 
         items.forEach(item => {
-            newTotalPrice += item[0].price * item.quantity
+            newTotalPrice += item.price * item.quantity
         })
 
         setTotalPrice(newTotalPrice)
@@ -65,18 +65,18 @@ export function CartModal(props) {
                     <div>
                         {
                             items.map(item => (
-                                <div key={item[0].medicine_id} className='flex relative py-4 px-4 pr-12'>
+                                <div key={item.medicine_id} className='flex relative py-4 px-4 pr-12'>
                                     <div className='bg-zinc-200/30 dark:bg-zinc-900/30 hover:bg-zinc-200/90 dark:hover:bg-zinc-900/90 overflow-hidden rounded-md transition-color duration-100'>
                                         <Image
-                                            src={item[0].image}
-                                            alt={item[0].name}
+                                            src={item.image}
+                                            alt={item.name}
                                             width={80}
                                             height={80}
                                         />
                                     </div>
                                     <div className='flex flex-col pl-3 pr-4 py-2'>
-                                        <span>{item[0].name}</span>
-                                        <span className='text-sm opacity-75'>{item[0].price} $</span>
+                                        <span>{item.name}</span>
+                                        <span className='text-sm opacity-75'>{item.price} $</span>
                                     </div>
                                     <IconButton
                                         aria-label='Remove item'
@@ -91,7 +91,7 @@ export function CartModal(props) {
                                         className='text-zinc-200 rounded-md top-0 right-0 translate-y-[43%]'
                                         onClick={() =>  {
                                             playSound()
-                                            dispatch(removeItem(item[0].medicine_id))
+                                            dispatch(removeItem(item.medicine_id))
                                         }}
                                     >
                                     </IconButton>

@@ -20,11 +20,12 @@ import Image from 'next/image'
 export function CartItem(props) {
     const { item } = props
     const {
+        medicine_id,
         name,
-        image,
-        id,
         description,
-        finalPrice,
+        manufacturer,
+        price,
+        image,
         quantity,
     } = item
 
@@ -59,9 +60,12 @@ export function CartItem(props) {
                     />
                 </div>
                 <div className='mt-4'>
-                    <h3 className='pl-2 pr-4 py-1 transition-color duration-100'>
+                    <h3 className='text-xl pl-2 pr-4 pt-1 transition-color duration-100'>
                         {name}
                     </h3>
+                    <h4 className='text-lg pl-2 pr-4 pb-1 text-green-600'>
+                        {manufacturer}
+                    </h4>
                     <span className='opacity-60 pl-2 pr-4 py-1 rounded-md transition-color duration-100'>
                         {description}
                     </span>
@@ -69,7 +73,7 @@ export function CartItem(props) {
             </div>
             <div className='flex flex-col mt-4 mb-20 lg:mb-0'>
                 <div className='pl-2 pr-4 py-1 bg-zinc-400/30 dark:bg-zinc-700/30 hover:bg-zinc-400/50 dark:hover:bg-zinc-700/50 rounded-md transition-color duration-100'>
-                    {finalPrice} * {quantity} = {finalPrice * quantity}
+                    {price} * {quantity} = {price * quantity}
                 </div>
                 <div className='mt-2 relative bg-zinc-400/30 dark:bg-zinc-700/30 hover:bg-zinc-400/50 dark:hover:bg-zinc-700/50 rounded-md transition-color duration-100'>
                     <input onChange={(e) => setCount(e.target.value)}
@@ -109,7 +113,7 @@ export function CartItem(props) {
             </div>
             <button onClick={() => {
                 playSound()
-                dispatch(removeItem(id))
+                dispatch(removeItem(medicine_id))
             }}
                     className='absolute bottom-6 right-3 h-9 px-4 py-1 text-zinc-200 bg-rose-800 hover:bg-rose-900 rounded-md'
             >
@@ -122,11 +126,17 @@ export function CartItem(props) {
 export function CartItemSlider(props) {
     const { item } = props
     const {
-        items,
-        id,
-        finalPrice,
+        medicine_id,
+        name,
+        description,
+        manufacturer,
+        price,
+        image,
+        image2,
         quantity,
     } = item
+
+    const images = [image, image2]
 
     const [count, setCount] = useState(quantity)
 
@@ -147,9 +157,9 @@ export function CartItemSlider(props) {
     const dispatch = useDispatch()
 
     return (
-        <div className='cart__item relative flex flex-col md:flex-row justify-between px-3 py-2 mb-4 bg-zinc-200/30 dark:bg-zinc-900/30 hover:bg-zinc-200/90 dark:hover:bg-zinc-900/90 rounded-md transition-color duration-100'>
+        <div className='cart__item relative flex flex-col md:flex-row justify-between px-4 py-5 mb-4 bg-zinc-200/30 dark:bg-zinc-900/30 hover:bg-zinc-200/90 dark:hover:bg-zinc-900/90 rounded-md transition-color duration-100'>
             <Swiper
-                    className='max-w-[512px]'
+                    className='min-w-[256px] max-w-[256px]'
                     modules={[Navigation, Pagination, Autoplay, Mousewheel]}
                     spaceBetween={50}
                     slidesPerView={1}
@@ -162,35 +172,38 @@ export function CartItemSlider(props) {
                     pagination={{ clickable: true }}
             >
             {
-                items.map(item => (
-                    <SwiperSlide key={item.id}>
-                        <div className='flex flex-col md:flex-row'>
-                            <div className='overflow-hidden bg-transparent rounded-md aspect-none'>
+                images.map(image => (
+                    <SwiperSlide key={image}>
+                            <div className='m-1 overflow-hidden bg-transparent rounded-md aspect-none'>
                                 <Image
-                                    className='object-cover object-center w-64 p-3'
-                                    src={item.images.featured || item.images.icon}
-                                    alt={item.name}
+                                    className='object-cover object-center w-64'
+                                    src={image}
+                                    alt={name}
                                     width={256}
                                     height={256}
                                 />
                             </div>
-                            <div className='mt-4'>
-                                <h3 className='pl-2 pr-4 py-1 transition-color duration-100'>
-                                    {item.name}
-                                </h3>
-                                <span className='opacity-60 pl-2 pr-4 py-1 rounded-md transition-color duration-100'>
-                                    {item.description}
-                                </span>
-                            </div>
-                        </div>
                     </SwiperSlide>
                 ))
             }
 
             </Swiper>
+            <div className='flex flex-col md:flex-row ml-3'>
+                <div className='mt-4'>
+                    <h3 className='text-xl pl-2 pr-4 pt-1 transition-color duration-100'>
+                        {name}
+                    </h3>
+                    <h4 className='text-lg pl-2 pr-4 pb-1 text-green-600'>
+                        {manufacturer}
+                    </h4>
+                    <span className='opacity-60 pl-2 pr-4 py-1 rounded-md transition-color duration-100'>
+                        {description}
+                    </span>
+                </div>
+            </div>
             <div className='flex flex-col mt-4 mb-20 lg:mb-0'>
                 <div className='pl-2 pr-4 py-1 bg-zinc-400/30 dark:bg-zinc-700/30 hover:bg-zinc-400/50 dark:hover:bg-zinc-700/50 rounded-md transition-color duration-100'>
-                    {finalPrice} * {quantity} = {finalPrice * quantity}
+                    {price} * {quantity} = {price * quantity}
                 </div>
                 <div className='mt-2 relative bg-zinc-400/30 dark:bg-zinc-700/30 hover:bg-zinc-400/50 dark:hover:bg-zinc-700/50 rounded-md transition-color duration-100'>
                     <input onChange={(e) => setCount(e.target.value)}
@@ -230,7 +243,7 @@ export function CartItemSlider(props) {
             </div>
             <button onClick={() => {
                 playSound()
-                dispatch(removeItem(id))
+                dispatch(removeItem(medicine_id))
             }}
                     className='absolute bottom-6 right-3 h-9 px-4 py-1 text-zinc-200 bg-rose-800 hover:bg-rose-900 rounded-md'
             >
