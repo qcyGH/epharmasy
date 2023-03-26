@@ -17,7 +17,7 @@ export function CartModal(props) {
         let newTotalPrice = 0
 
         items.forEach(item => {
-            newTotalPrice += item.price * item.quantity
+            newTotalPrice += item[0].price * item.quantity
         })
 
         setTotalPrice(newTotalPrice)
@@ -65,18 +65,18 @@ export function CartModal(props) {
                     <div>
                         {
                             items.map(item => (
-                                <div key={item.medicine_id} className='flex relative py-4 px-4 pr-12'>
+                                <div key={item[0].medicine_id} className='flex relative py-4 px-4 pr-12'>
                                     <div className='bg-zinc-200/30 dark:bg-zinc-900/30 hover:bg-zinc-200/90 dark:hover:bg-zinc-900/90 overflow-hidden rounded-md transition-color duration-100'>
                                         <Image
-                                            src={item.image}
-                                            alt={item.name}
+                                            src={item[0].image}
+                                            alt={item[0].name}
                                             width={80}
                                             height={80}
                                         />
                                     </div>
                                     <div className='flex flex-col pl-3 pr-4 py-2'>
-                                        <span>{item.name}</span>
-                                        <span className='text-sm opacity-75'>{item.price} $</span>
+                                        <span>{item[0].name}</span>
+                                        <span className='text-sm opacity-75'>{item[0].price} $</span>
                                     </div>
                                     <IconButton
                                         aria-label='Remove item'
@@ -91,7 +91,7 @@ export function CartModal(props) {
                                         className='text-zinc-200 rounded-md top-0 right-0 translate-y-[43%]'
                                         onClick={() =>  {
                                             playSound()
-                                            dispatch(removeItem(item.medicine_id))
+                                            dispatch(removeItem(item[0].medicine_id))
                                         }}
                                     >
                                     </IconButton>
@@ -99,7 +99,7 @@ export function CartModal(props) {
                             ))
                         }
                     </div>
-                    <span className='opacity-75 block text-right pr-2'>Total price: {totalPrice}</span>
+                    <span className='opacity-75 block text-right pr-2'>Total price: {totalPrice} $</span>
                     <Link
                         href='/cart'
                         className='w-max opacity-100 text-slate-100 bg-orange-600 mt-6 px-6 py-2 my-2 rounded-md hover:scale-95 active:scale-90 transition-all ease duration-200'
