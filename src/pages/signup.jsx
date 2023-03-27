@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
 
 import useSound from 'use-sound'
 
@@ -12,9 +13,29 @@ export default function SignUp() {
         reset
     } = useForm({ mode: 'onBlur'})
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
 
-        alert(JSON.stringify(data))
+        const {
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            password
+        } = data
+
+        try {
+            const response = await axios.post('/api/create-user', {
+              firstName,
+              lastName,
+              email,
+              phoneNumber,
+              password
+            })
+
+            console.log(response.data);
+          } catch (error) {
+            console.error(error);
+          }
 
         reset()
       }
