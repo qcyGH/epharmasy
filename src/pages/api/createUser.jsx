@@ -4,10 +4,10 @@ import dbConnection from '@/pages/api/db'
 const handler = nextConnect()
 
 handler.post(async (req, res) => {
-    const { firstName, lastName, email, phoneNumber, password } = req.body;
+    const { firstName, lastName, email, phoneNumber, password } = req.body
 
     if (!firstName || !lastName || !phoneNumber || !email || !password) {
-      return res.status(400).send('Name, email, phone, and password are required');
+      return res.status(400).send('Name, email, phone, and password are required')
     }
 
     try {
@@ -21,7 +21,7 @@ handler.post(async (req, res) => {
 
         res.status(201).json(result)
     } catch (error) {
-        console.error(error);
+        console.error(error)
         res.status(500).json({ message: 'Internal server error' })
     }
 })

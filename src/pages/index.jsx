@@ -15,7 +15,7 @@ export default function Home(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/api/data')
+      const response = await fetch('/api/medicines')
       const data = await response.json()
       console.log(data)
 

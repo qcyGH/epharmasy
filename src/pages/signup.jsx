@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 
@@ -13,6 +13,8 @@ export default function SignUp() {
         reset
     } = useForm({ mode: 'onBlur'})
 
+    const [ isSameClient, setSameClient ] = useState(false)
+
     const onSubmit = async (data) => {
 
         const {
@@ -23,21 +25,51 @@ export default function SignUp() {
             password
         } = data
 
+        let sameClient = false
+
+        const createUser = async (firstName, lastName, email, phoneNumber, password, isSameClient) => {
+            if (!isSameClient) {
+                const response = await axios.post('/api/createUser', {
+                    firstName,
+                    lastName,
+                    email,
+                    phoneNumber,
+                    password
+                })
+
+                console.info('Added new user')
+
+            } else {
+                console.error('Client with same email or phone number already in database')
+            }
+        }
+
         try {
-            const response = await axios.post('/api/create-user', {
-              firstName,
-              lastName,
-              email,
-              phoneNumber,
-              password
-            })
+            const response = await fetch('/api/clients')
+            const clients = await response.json()
 
-            console.log(response.data);
-          } catch (error) {
-            console.error(error);
-          }
+            if (clients.status == '200') {
+                await clients.data.forEach(client => {
 
-        reset()
+                    if (client.email == email || client.phone_number == phoneNumber) {
+                        sameClient = true
+
+                    }
+                })
+            } else if (clients.status == '500') {
+                console.error('Database connection error')
+            }
+
+            console.log(sameClient)
+
+            await createUser(firstName, lastName, email, phoneNumber, password, sameClient)
+
+            reset()
+        } catch(error) {
+            console.error(error)
+        }
+
+        setSameClient(sameClient)
       }
 
       const [playSound] = useSound('/sounds/sine-click.mp3', { volume: 0.5 })
@@ -45,6 +77,10 @@ export default function SignUp() {
     return (
         <>
             <h1 className='mt-5 text-2xl font-semibold text-center'>Sign Up</h1>
+
+            {
+                isSameClient && <h2>Client with same email or phone number already in database</h2>
+            }
 
             <div className='flex flex-col items-center'>
                 <form
