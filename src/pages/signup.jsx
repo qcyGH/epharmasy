@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useToast } from '@chakra-ui/react'
 import axios from 'axios'
 
 import useSound from 'use-sound'
@@ -14,6 +15,8 @@ export default function SignUp() {
     } = useForm({ mode: 'onBlur'})
 
     const [ isSameClient, setSameClient ] = useState(false)
+
+    const notification = useToast()
 
     const onSubmit = async (data) => {
 
@@ -37,6 +40,13 @@ export default function SignUp() {
                     password
                 })
 
+                notification({
+                    title: 'Successfully created new account',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                  })
+
                 console.info('Added new user')
 
             } else {
@@ -59,8 +69,6 @@ export default function SignUp() {
             } else if (clients.status == '500') {
                 console.error('Database connection error')
             }
-
-            console.log(sameClient)
 
             await createUser(firstName, lastName, email, phoneNumber, password, sameClient)
 
