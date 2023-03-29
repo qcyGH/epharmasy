@@ -15,6 +15,6 @@ Next.js + MySQL
 - [X] Create user
   - [X] Checking for user with same email or phone number 
 - [ ] Login with password
-  - [ ] Auto login after sign up
+  - [X] Auto login after sign up
 - [ ] Create order
 - [X] Cart page
