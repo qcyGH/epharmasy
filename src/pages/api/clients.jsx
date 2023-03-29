@@ -11,7 +11,7 @@ handler.get(async (req, res) => {
       data: rows,
       status: 200
     })
-    console.info('Database connection successful')
+    console.info('Clients: Database connection successful')
   } catch (error) {
     res.status(500).json({ status: 500 })
     console.info('Database connection error')

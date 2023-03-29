@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useToast } from '@chakra-ui/react'
+import { useClients } from '@/hooks/useDB'
 import axios from 'axios'
 
 import { useDispatch } from "react-redux"
@@ -17,10 +18,10 @@ export default function SignUp() {
         reset
     } = useForm({ mode: 'onBlur'})
 
-    const [ isSameClient, setSameClient ] = useState(false)
-
     const notification = useToast()
     const dispatch = useDispatch()
+    const [clients, getClients] = useClients()
+
 
     const onSubmit = async (data) => {
 
@@ -32,51 +33,45 @@ export default function SignUp() {
             password
         } = data
 
+        // used because "useState" troubleshooting: https://react.dev/reference/react/useState#ive-updated-the-state-but-logging-gives-me-the-old-value
         let sameClient = false
 
-        const createUser = async (firstName, lastName, email, phoneNumber, password, isSameClient) => {
-            if (!isSameClient) {
-                const response = await axios.post('/api/createUser', {
-                    firstName,
-                    lastName,
-                    email,
-                    phoneNumber,
-                    password
-                })
+        // creating client
+        const createUser = async (firstName, lastName, email, phoneNumber, password) => {
 
-                notification({
-                    title: 'Successfully created new account',
-                    status: 'success',
-                    duration: 3000,
-                    isClosable: true,
-                })
+            const response = await axios.post('/api/createUser', {
+                firstName,
+                lastName,
+                email,
+                phoneNumber,
+                password
+            })
 
-                const user = firstName
-                const id = await getClientId(email)
+            //* success notification
+            notification({
+                title: 'Successfully created new account',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            })
 
-                console.log(`ID: ${id}`)
+            // auto login
+            const user = firstName
+            const id = await getClientId(email)
 
-                dispatch(signin({ user, id }))
-
-                console.info('Added new user')
-
-            } else {
-                console.error('Client with same email or phone number already in database')
-            }
+            dispatch(signin({ user, id }))
+            // auto login
         }
 
         const getClientId = async (email) => {
-            const response = await fetch('/api/clients')
-            const clients = await response.json()
+            const clients = await getClients()
             let id = 0
 
             if (clients.status == '200') {
                 clients.data.forEach(client => {
 
                     if (client.email == email) {
-                        console.log('Found client id:', client.client_id, typeof(client.client_id))
                         id = client.client_id
-
                     }
                 })
             } else if (clients.status == '500') {
@@ -87,29 +82,36 @@ export default function SignUp() {
         }
 
         try {
-            const response = await fetch('/api/clients')
-            const clients = await response.json()
 
-            if (clients.status == '200') {
-                await clients.data.forEach(client => {
+            // checking for clients with same email or phone number
+            await clients.data.forEach(client => {
 
-                    if (client.email == email || client.phone_number == phoneNumber) {
-                        sameClient = true
+                if (client.email == email || client.phone_number == phoneNumber) {
+                    sameClient = true
 
-                    }
+                }
+            })
+
+            if (!sameClient) {
+
+                // use function for creating new client
+                await createUser(firstName, lastName, email, phoneNumber, password)
+            } else {
+
+                // error notification
+                notification({
+                    title: 'Client with same email or phone number already in database',
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: false,
                 })
-            } else if (clients.status == '500') {
-                console.error('Database connection error')
             }
 
-            await createUser(firstName, lastName, email, phoneNumber, password, sameClient)
 
             reset()
         } catch(error) {
             console.error(error)
         }
-
-        setSameClient(sameClient)
       }
 
       const [playSound] = useSound('/sounds/sine-click.mp3', { volume: 0.5 })
@@ -117,10 +119,6 @@ export default function SignUp() {
     return (
         <>
             <h1 className='mt-5 text-2xl font-semibold text-center'>Sign Up</h1>
-
-            {
-                isSameClient && <h2>Client with same email or phone number already in database</h2>
-            }
 
             <div className='flex flex-col items-center'>
                 <form
