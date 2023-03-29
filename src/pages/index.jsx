@@ -17,7 +17,6 @@ export default function Home(props) {
     const fetchData = async () => {
       const response = await fetch('/api/medicines')
       const data = await response.json()
-      console.log(data)
 
       if (data.status == '200') {
         dispatch(fetchItems({data}))

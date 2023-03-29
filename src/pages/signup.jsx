@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useToast } from '@chakra-ui/react'
 import { useClients } from '@/hooks/useDB'
@@ -112,7 +112,7 @@ export default function SignUp() {
         } catch(error) {
             console.error(error)
         }
-      }
+    }
 
       const [playSound] = useSound('/sounds/sine-click.mp3', { volume: 0.5 })
 
@@ -237,7 +237,7 @@ export default function SignUp() {
                         value='Sign Up'
                         type='submit'
                         disabled={!isValid}
-                        className='disabled:opacity-40 disabled:hover:scale-100 disabled:active:scale-100 text-gray-100 bg-fuchsia-600 px-6 py-2 mt-4 mb-2 rounded-md hover:scale-95 active:scale-90 transition-all ease duration-200'
+                        className='disabled:opacity-40 disabled:hover:scale-100 disabled:active:scale-100 text-gray-100 bg-fuchsia-600 px-6 py-2 mt-5 mb-2 rounded-md hover:scale-95 active:scale-90 transition-all ease duration-200'
                     />
                 </form>
             </div>
