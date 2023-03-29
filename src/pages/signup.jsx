@@ -3,6 +3,9 @@ import { useForm } from 'react-hook-form'
 import { useToast } from '@chakra-ui/react'
 import axios from 'axios'
 
+import { useDispatch } from "react-redux"
+import { signin } from "@/store/userSlice"
+
 import useSound from 'use-sound'
 
 export default function SignUp() {
@@ -17,6 +20,7 @@ export default function SignUp() {
     const [ isSameClient, setSameClient ] = useState(false)
 
     const notification = useToast()
+    const dispatch = useDispatch()
 
     const onSubmit = async (data) => {
 
@@ -45,13 +49,41 @@ export default function SignUp() {
                     status: 'success',
                     duration: 3000,
                     isClosable: true,
-                  })
+                })
+
+                const user = firstName
+                const id = await getClientId(email)
+
+                console.log(`ID: ${id}`)
+
+                dispatch(signin({ user, id }))
 
                 console.info('Added new user')
 
             } else {
                 console.error('Client with same email or phone number already in database')
             }
+        }
+
+        const getClientId = async (email) => {
+            const response = await fetch('/api/clients')
+            const clients = await response.json()
+            let id = 0
+
+            if (clients.status == '200') {
+                clients.data.forEach(client => {
+
+                    if (client.email == email) {
+                        console.log('Found client id:', client.client_id, typeof(client.client_id))
+                        id = client.client_id
+
+                    }
+                })
+            } else if (clients.status == '500') {
+                console.error('Database connection error')
+            }
+
+            return id
         }
 
         try {
