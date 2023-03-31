@@ -6,11 +6,18 @@ import { CloseButton } from '@chakra-ui/react'
 import { signout } from '@/store/userSlice'
 import Login from './Login'
 
+import useSound from 'use-sound'
+
 
 export function UserModal(props) {
     const user = useSelector(state => state.user.user)
     const { show, closeModalOutside, closeModal } = props
     const rootUserModal = useRef(null)
+
+    const [playSound] = useSound(
+        '/sounds/sine-click.mp3',
+        { volume: 0.5 }
+    )
 
     const dispatch = useDispatch()
 
@@ -41,14 +48,17 @@ export function UserModal(props) {
                             transition-color duration-300
                 '>
                 {
-                    user ? <div className='flex flex-col pr-6'>
-                                <span className='text-zinc-700 leading-none hover:text-zinc-800 dark:text-zinc-300 dark:hover:text-zinc-200 ease-in duration-150'>
+                    user ? <div className='flex flex-col items-start pl-1 pr-6 pt-2 pb-1'>
+                                <span className='text-lg text-zinc-700 leading-none dark:text-zinc-300 ease-in duration-150'>
                                     {user}
                                 </span>
-                                <button onClick={() => dispatch(signout())} className='mt-4 text-zinc-700 leading-none hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100 ease-in duration-150'>
+                                <button onClick={() => dispatch(signout())} className='opacity-100 font-semibold bg-[#edf2f7] hover:bg-[#e2e8f0] dark:bg-[#ffffff14] dark:hover:bg-[#ffffff29] rounded-md px-3 py-2 mt-4 duration-200'>
                                     Sign out
                                 </button>
-                            </div> : <Login />
+                            </div> : <div className='flex flex-col items-start pl-1 pr-4 pt-2 pb-1'>
+                                <Link onClick={() => playSound()} href='/signup' className='opacity-100 font-semibold bg-[#edf2f7] hover:bg-[#e2e8f0] dark:bg-[#ffffff14] dark:hover:bg-[#ffffff29] rounded-md px-3 py-2 mb-3 duration-200'>Sign Up</Link>
+                                <Login />
+                            </div>
                 }
                 <span className='absolute top-1 right-1'>
                     <CloseButton
