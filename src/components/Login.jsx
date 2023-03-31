@@ -1,10 +1,11 @@
 import React, { useRef } from 'react'
+import Link from 'next/link'
 
 import { useForm } from 'react-hook-form'
 import { useToast } from '@chakra-ui/react'
 import { useClients } from '@/hooks/useDB'
-
 import { useDispatch, useSelector } from 'react-redux'
+
 import { signin } from '@/store/userSlice'
 
 import {
@@ -266,6 +267,11 @@ export function RequireLogin({ children }) {
                   className='disabled:opacity-40 disabled:hover:scale-100 disabled:active:scale-100 text-gray-100 bg-fuchsia-600 px-6 py-2 mt-5 mb-2 rounded-md hover:scale-95 active:scale-90 transition-all ease duration-200'
                 />
               </form>
+              <span className='mt-6 mb-2'>Don`t have an account?
+                <Link onClick={() => playSound()} href='/signup' className='ml-1 text-green-600 hover:text-green-500 ease-in duration-150 opacity-100'>
+                  Create new account
+                </Link>
+              </span>
             </div>
           </ModalBody>
         </ModalContent>
