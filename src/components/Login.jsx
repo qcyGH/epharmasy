@@ -88,7 +88,7 @@ export default function Login() {
 
   }
 
-  const [playSound] = useSound('/sounds/sine-click.mp3', { volume: 0.5 });
+  const [playSound] = useSound('/sounds/sine-click.mp3', { volume: 0.5 })
 
   return (
     <>

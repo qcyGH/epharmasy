@@ -9,6 +9,7 @@ import useSound from 'use-sound'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { makePurchase } from '@/store/shopSlice'
+import OrderModal from '@/components/OrderModal'
 
 export default function Cart() {
   const orderList = useSelector(state => state.shop.orderList)
@@ -45,30 +46,54 @@ export default function Cart() {
 
       {
         orderList.length > 0
-        ? <div className='w-full p-2 pr-4 mt-10
-            bg-zinc-300/90 dark:bg-zinc-800/90 rounded-md backdrop-blur-xl backdrop-saturate-150
-            shadow-lg shadow-zinc-400/50 dark:shadow-zinc-900/50
-            text-zinc-900 dark:text-zinc-200
-            transition-color duration-300
-            '>
-            <div className='pb-2'>
-              <div className='flex-col py-4 px-4'>
-                {
-                  orderList.map(item => (
-                    item.image2 != 'any' ? <CartItemSlider
-                      item={item}
-                      key={item.medicine_id}
-                    />
-                    : <CartItem
-                      item={item}
-                      key={item.medicine_id}
-                    />
-                  ))
-                }
+        ? <>
+          <div className='w-full p-2 pr-4 mt-10
+              bg-zinc-300/90 dark:bg-zinc-800/90 rounded-md backdrop-blur-xl backdrop-saturate-150
+              shadow-lg shadow-zinc-400/50 dark:shadow-zinc-900/50
+              text-zinc-900 dark:text-zinc-200
+              transition-color duration-300
+              '>
+              <div className='pb-2'>
+                <div className='flex-col py-4 px-4'>
+                  {
+                    orderList.map(item => (
+                      item.image2 != 'any' ? <CartItemSlider
+                        item={item}
+                        key={item.medicine_id}
+                      />
+                      : <CartItem
+                        item={item}
+                        key={item.medicine_id}
+                      />
+                    ))
+                  }
+                </div>
+                <span className='block text-right pr-2'>Total price: {totalPrice} $</span>
               </div>
-              <span className='block text-right pr-2'>Total price: {totalPrice} $</span>
-            </div>
-        </div>
+          </div>
+
+          <div className='mt-4 flex justify-center'>
+            <button
+              onClick={() => {
+                playSound()
+
+                notification({
+                  title: `Congratulations, ${user}. All goods have added to order`,
+                  status: 'success',
+                  duration: 3000,
+                  isClosable: true,
+                })
+
+                dispatch(makePurchase())
+              }}
+              className='text-lg text-slate-100 bg-purple-600 width-max px-6 py-2 my-2 rounded-md hover:scale-95 active:scale-90 transition-all ease duration-200'
+            >
+              Purchase
+            </button>
+            <OrderModal />
+          </div>
+
+        </>
       : <div className='flex flex-col justify-center items-center'>
           <span className='p-2 pr-4 mt-10 text-xl text-center text-zinc-900 dark:text-zinc-200
           transition-color duration-150'>
@@ -77,29 +102,6 @@ export default function Cart() {
           <Link onClick={() => playSound()} href='/' className='opacity-100 text-slate-100 bg-orange-600 width-max px-6 py-2 my-2 rounded-md hover:scale-95 active:scale-90 transition-all ease duration-200'>Go to store page</Link>
       </div>
       }
-      <>
-        {
-        orderList.length > 0 && <div className='mt-4 flex justify-center'>
-                                  <button
-                                    onClick={() => {
-                                      playSound()
-
-                                      notification({
-                                        title: `Congratulations, ${user}. All goods have added to order`,
-                                        status: 'success',
-                                        duration: 3000,
-                                        isClosable: true,
-                                      })
-
-                                      dispatch(makePurchase())
-                                    }}
-                                    className='text-lg text-slate-100 bg-purple-600 width-max px-6 py-2 my-2 rounded-md hover:scale-95 active:scale-90 transition-all ease duration-200'
-                                  >
-                                    Purchase
-                                  </button>
-                                </div>
-        }
-      </>
     </RequireLogin>
   )
 }
