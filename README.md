@@ -14,7 +14,8 @@ Next.js + MySQL
 - [X] Cart modal
 - [X] Create user
   - [X] Checking for user with same email or phone number 
-- [ ] Login with password
+- [X] Login with password
   - [X] Auto login after sign up
+  - [ ] Login and sign up in RequireLogin
 - [ ] Create order
 - [X] Cart page
