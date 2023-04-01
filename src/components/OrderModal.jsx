@@ -48,16 +48,15 @@ export default function OrderModal() {
       paymentType
     } = data
 
-    const quantity = []
+    let quantity = ''
     let price = 0
-    const medicineId = []
+    let medicineId = ''
 
     orderList.forEach((good) => {
       price += parseInt(good.price)
-      quantity.push(good.quantity)
-      medicineId.push(good.medicine_id)
+      quantity += good.quantity + ', '
+      medicineId += good.medicine_id + ', '
     })
-
 
     // making order
     try {

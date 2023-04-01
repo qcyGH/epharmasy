@@ -112,7 +112,7 @@ export function CardSlider(props) {
     return (
             <div className='flex flex-col relative max-w-[288px] justify-between bg-zinc-200 dark:bg-zinc-800 rounded-lg shadow-lg shadow-zinc-400/50 dark:shadow-zinc-900/50 w-max h-max hover:shadow-none hover:scale-95 transition-all duration-150 ease-in'>
                 <Swiper
-                    className='max-w-[288px]'
+                    className='max-w-[288px] rounded-t-md rounded-b'
                     modules={[Navigation, Pagination, Autoplay, Mousewheel]}
                     direction='horizontal'
                     spaceBetween={50}
@@ -128,7 +128,7 @@ export function CardSlider(props) {
                     {
                         images.map(image => (
                             <SwiperSlide key={image}>
-                                <div className='overflow-hidden rounded-t-md rounded-b p-3 bg-zinc-200 dark:bg-zinc-800 aspect-none transition-all duration-150 ease-in'>
+                                <div className='overflow-hidden rounded-t-md rounded-b bg-zinc-200 dark:bg-zinc-800 aspect-none transition-all duration-150 ease-in'>
                                     <Image
                                         className='object-cover object-center w-72 rounded-md'
                                         src={image}
