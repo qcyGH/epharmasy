@@ -30,6 +30,19 @@ Optional: `SQLyog`
 
 ## Images
 
+### Main
+![Main](https://github.com/qcyGH/epharmasy/blob/main/.images/main.png?raw=true)
+
+### Cart
+![Cart](https://github.com/qcyGH/epharmasy/blob/main/.images/cart.png?raw=true)
+
+### FAQ
+![FAQ](https://github.com/qcyGH/epharmasy/blob/main/.images/faq.png?raw=true)
+
+### Sign Up
+![Sign Up](https://github.com/qcyGH/epharmasy/blob/main/.images/signup.png?raw=true)
+
+
 ## Tests list
 
 - [X] Connecting to Data Base
