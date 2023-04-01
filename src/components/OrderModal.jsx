@@ -5,6 +5,7 @@ import useSound from 'use-sound'
 import { useForm } from 'react-hook-form'
 import { useToast } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
+import { makePurchase } from '@/store/shopSlice'
 
 import {
     Modal,
@@ -77,11 +78,6 @@ export default function OrderModal() {
         paymentType
       })
 
-      //console.log(JSON.parse(response.request.response.slice(1, -6)).insertId)
-
-      console.log(response)
-
-
       //* success notification
       notification({
         title: 'Successfully made new order',
@@ -89,6 +85,8 @@ export default function OrderModal() {
         duration: 3000,
         isClosable: true,
       })
+
+      dispatch(makePurchase())
     } catch(error) {
       console.error(error)
     }
@@ -99,10 +97,14 @@ export default function OrderModal() {
 
   return (
     <>
-      <Button px='12px' mr='18px' onClick={() => {
-        playSound()
-        onOpen()
-      }}>
+      <Button _active={{transform: 'scale(90%)'}}
+              _hover={{ background:'rgb(147, 51, 234)', transform: 'scale(95%)' }}
+              fontSize='18px' fontWeight='400' color='rgb(241, 245, 249)' bg='rgb(147, 51, 234)' px='24px' py='11px' height='100%' transitionTimingFunction='ease' transitionDuration='200ms'
+        onClick={() => {
+          playSound()
+          onOpen()
+        }}
+      >
         Make order
       </Button>
       <Modal

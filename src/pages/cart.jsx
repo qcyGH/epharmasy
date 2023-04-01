@@ -72,24 +72,7 @@ export default function Cart() {
               </div>
           </div>
 
-          <div className='mt-4 flex justify-center'>
-            <button
-              onClick={() => {
-                playSound()
-
-                notification({
-                  title: `Congratulations, ${user}. All goods have added to order`,
-                  status: 'success',
-                  duration: 3000,
-                  isClosable: true,
-                })
-
-                dispatch(makePurchase())
-              }}
-              className='text-lg text-slate-100 bg-purple-600 width-max px-6 py-2 my-2 rounded-md hover:scale-95 active:scale-90 transition-all ease duration-200'
-            >
-              Purchase
-            </button>
+          <div className='mt-6 flex justify-center'>
             <OrderModal />
           </div>
 
