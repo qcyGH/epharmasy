@@ -1,5 +1,34 @@
-# ePharmasy
-Next.js + MySQL
+# ![Logo](https://raw.githubusercontent.com/qcyGH/epharmasy/main/public/favicon.ico "Fortnite shop") ePharmasy
+
+## Menu
+
+- [Description](https://github.com/qcyGH/epharmasy#Description)
+- [How to use](https://github.com/qcyGH/epharmasy#How-to-use)
+- [Images](https://github.com/qcyGH/epharmasy#Images)
+- [Tests list](https://github.com/qcyGH/epharmasy#Tests-list)
+
+
+## Description
+
+This is a project made with React (Redux, Next.js, React hook forms, useSound), MySQL, ChakraUI and Tailwind. It realised auto electronic pharmasy, using database and MySQL. Project inlcude API for connection with database and making query.  
+User can create an accound, add goods to cart and make order. 
+
+## How to use
+
+Required: `node` `MySQL` `IDE`  
+Optional: `SQLyog`
+
+1. Configure your MySQL server (required `utf-8`)
+2. Put my database to your MySQL data folder
+3. Start MySQL server
+4. Open your IDE (VSCode for example)
+5. In IDE open terminal and put this command to install dependencies: `npm install`
+6. Then create `.env.local` file in root project directory with this variables: `DB_HOST=localhost` `DB_USER` `DB_PASSWORD` `DB_DATABASE`. And put your db connection data in this variables
+7. Start server by this command: `npm run dev`
+8. Open the link from terminal
+9. Congratulations (●'◡'●)
+
+## Images
 
 ## Tests list
 
@@ -19,3 +48,5 @@ Next.js + MySQL
   - [X] Login and sign up in RequireLogin
 - [X] Create order
 - [X] Cart page
+
+P.s. Thank you for viewing my work (ಥ _ ಥ)
