@@ -27,49 +27,101 @@ export function useClients() {
 }
 
 export async function useMedicines() {
-    try {
-        const response = await fetch('/api/medicines')
-        const result = await response.json()
+
+    const [data, setData] = useState(getData)
+
+    async function getData() {
+
+        let result = {}
+
+        try {
+            const response = await fetch('/api/medicines')
+            result = await response.json()
+
+            setData(result)
+
+        } catch(error) {
+            console.error(error)
+        }
 
         return result
-
-    } catch(error) {
-        console.error(error)
     }
+
+
+    return [data, getData]
 }
 
 export async function useOrders() {
-    try {
-        const response = await fetch('/api/orders')
-        const result = await response.json()
+
+    const [data, setData] = useState(getData)
+
+    async function getData() {
+
+        let result = {}
+
+        try {
+            const response = await fetch('/api/orders')
+            result = await response.json()
+
+            setData(result)
+
+        } catch(error) {
+            console.error(error)
+        }
 
         return result
-
-    } catch(error) {
-        console.error(error)
     }
+
+
+    return [data, getData]
 }
 
 export async function usePayments() {
-    try {
-        const response = await fetch('/api/payments')
-        const result = await response.json()
+
+    const [data, setData] = useState(getData)
+
+    async function getData() {
+
+        let result = {}
+
+        try {
+            const response = await fetch('/api/payments')
+            result = await response.json()
+
+            setData(result)
+
+        } catch(error) {
+            console.error(error)
+        }
 
         return result
-
-    } catch(error) {
-        console.error(error)
     }
+
+
+    return [data, getData]
 }
 
 export async function useShipments() {
-    try {
-        const response = await fetch('/api/shipments')
-        const result = await response.json()
+
+    const [data, setData] = useState(getData)
+
+    async function getData() {
+
+        let result = {}
+
+        try {
+            const response = await fetch('/api/shipments')
+            result = await response.json()
+
+            setData(result)
+
+        } catch(error) {
+            console.error(error)
+        }
 
         return result
-
-    } catch(error) {
-        console.error(error)
     }
+
+
+    return [data, getData]
 }
