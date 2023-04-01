@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Layout>
       <Head>
-        <title>Fortnite shop</title>
+        <title>ePharmasy</title>
       </Head>
       <style jsx global>{`
         body, html {
