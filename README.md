@@ -11,7 +11,7 @@
 ## Description
 
 This is a project made with React (Redux, Next.js, React hook forms, useSound), MySQL, ChakraUI and Tailwind. It realised auto electronic pharmasy, using database and MySQL. Project inlcude API for connection with database and making query.  
-User can create an accound, add goods to cart and make order. 
+User can create an accounts, add goods to cart and make order. 
 
 ## How to use
 
