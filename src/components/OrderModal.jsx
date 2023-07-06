@@ -61,13 +61,6 @@ export default function OrderModal() {
     // making order
     try {
 
-      console.log(clientId,
-        quantity,
-        price,
-        medicineId,
-        address,
-        paymentType)
-
       const response = await axios.post('/api/makeOrder', {
         clientId,
         quantity,
@@ -76,6 +69,8 @@ export default function OrderModal() {
         address,
         paymentType
       })
+
+      console.log(response)
 
       //* success notification
       notification({
