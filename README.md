@@ -10,8 +10,8 @@
 
 ## Description
 
-This is a project made with React (Redux, Next.js, React hook forms, useSound), MySQL, ChakraUI and Tailwind. It realised auto electronic pharmasy, using database and MySQL. Project inlcude API for connection with database and making query.  
-User can create an accound, add goods to cart and make order. 
+This is a project made with React (Redux, Next.js, React hook forms, useSound), MySQL, ChakraUI and Tailwind. It realised auto electronic pharmasy, using database and MySQL. Project include API for connection with database and making query.  
+User can create an accounts, add goods to cart and make order. 
 
 ## How to use
 
@@ -23,7 +23,7 @@ Optional: `SQLyog`
 3. Start MySQL server
 4. Open your IDE (VSCode for example)
 5. In IDE open terminal and put this command to install dependencies: `npm install`
-6. Then create `.env.local` file in root project directory with this variables: `DB_HOST=localhost` `DB_USER` `DB_PASSWORD` `DB_DATABASE`. And put your db connection data in this variables
+6. Then create `.env.local` file in root project directory with this variables: `DB_HOST` `DB_USER` `DB_PASSWORD` `DB_DATABASE`. Put your db connection data in this variables
 7. Start server by this command: `npm run dev`
 8. Open the link from terminal
 9. Congratulations (●'◡'●)
